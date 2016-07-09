@@ -9,13 +9,4 @@
 	http://www.springframework.org/schema/mvc
 	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	
-	<!-- handler mapping相关 -->
-	<mvc:annotation-driven />
-	
-	<!-- controller相关 -->
-	<context:component-scan base-package="com.netease.marketOnline.controller" />
-	
-	<!-- view Resolver相关 -->
-	
 </beans>

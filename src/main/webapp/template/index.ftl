@@ -4,17 +4,19 @@
 <body>
 <#include "/include/support.ftl">
 <#include "/include/header.ftl">
+<#if type??>
 <#assign listType = RequestParameters['type']>
+</#if>
 <div class="g-doc">
     <div class="m-tab m-tab-fw m-tab-simple f-cb">
         <div class="tab">
             <ul>
-                <li <#if !listType || listType != 1>class="z-sel"</#if> ><a href="/">所有内容</a></li>
-                <#if user && user.usertype == 0><li <#if listType == 1>class="z-sel"</#if> ><a href="/?type=1">未购买的内容</a></li></#if>
+                <li <#if !listType?? || listType != 1>class="z-sel"</#if> ><a href="/">所有内容</a></li>
+                <#if user?? && user.usertype == 0><li <#if listType == 1>class="z-sel"</#if> ><a href="/?type=1">未购买的内容</a></li></#if>
             </ul>
         </div>
     </div>
-    <#if !productList || !productList?has_content>
+    <#if !productList?? || !productList?has_content>
     <div class="n-result">
         <h3>暂无内容！</h3>
     </div>
@@ -52,7 +54,7 @@
     </#if>
 </div>
 <#include "/include/footer.ftl">
-<script type="text/javascript" src="/js/global.js"></script>
-<script type="text/javascript" src="/js/pageIndex.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+<script type="text/javascript" src="js/pageIndex.js"></script>
 </body>
 </html>

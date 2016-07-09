@@ -8,10 +8,12 @@ import com.netease.marketOnline.meta.User;
 
 @Controller
 public class Index {
-	@RequestMapping("/index")
+	@RequestMapping("/")
 	public String indexPage(Model model) {
-		User user = null;
+		User user=null;
+
 		model.addAttribute("user", user);
 		return "index";
 	}
 }
+
