@@ -4,9 +4,7 @@
 <body>
 <#include "/include/support.ftl">
 <#include "/include/header.ftl">
-<#if type??>
 <#assign listType = RequestParameters['type']>
-</#if>
 <div class="g-doc">
     <div class="m-tab m-tab-fw m-tab-simple f-cb">
         <div class="tab">
@@ -45,7 +43,7 @@
                         <#if user && user.usertype==0 && x.isBuy><span class="had"><b>已购买</b></span></#if>
                         <#if user && user.usertype==1 && x.isSell><span class="had"><b>已售出</b></span></#if>
                     </a>
-                    <#if user?? && user.usertype==1 && !x.isSell><span class="u-btn u-btn-normal u-btn-xs del" data-del="${x.id}">删除</span></#if>
+                    <#if user && user.usertype==1 && !x.isSell><span class="u-btn u-btn-normal u-btn-xs del" data-del="${x.id}">删除</span></#if>
                 </li>
             </#list>
         </#if>
@@ -54,7 +52,7 @@
     </#if>
 </div>
 <#include "/include/footer.ftl">
-<script type="text/javascript" src="${basePath}/js/global.js"></script>
-<script type="text/javascript" src="${basePath}/js/pageIndex.js"></script>
+<script type="text/javascript" src="/js/global.js"></script>
+<script type="text/javascript" src="/js/pageIndex.js"></script>
 </body>
 </html>
