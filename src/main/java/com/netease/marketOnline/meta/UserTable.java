@@ -1,11 +1,11 @@
 package com.netease.marketOnline.meta;
 
 public class UserTable {
-	private int id;//����
-	private String userName;//�û���
-	private String password;//����md5����
-	private String nickName;//�û��ǳ�
-	private int userType;//���ͣ����0������1
+	private int id;//
+	private String userName;//
+	private String password;//
+	private String nickName;//
+	private int userType;//
 	public int getId() {
 		return id;
 	}

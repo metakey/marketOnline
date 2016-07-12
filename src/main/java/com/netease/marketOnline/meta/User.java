@@ -15,5 +15,4 @@ public class User {
 	public void setUsertype(int usertype) {
 		this.usertype = usertype;
 	}
-	
 }
