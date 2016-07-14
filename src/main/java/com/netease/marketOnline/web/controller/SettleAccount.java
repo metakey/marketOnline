@@ -14,12 +14,12 @@ import com.netease.marketOnline.meta.User;
  * 页面中列出购物车中所有内容的标题、价格、数量
  * 有“退出”和“购买”2个按钮
  * 查看js，“退出”指向window.history.back()
- * 购买调用'post'：'/api/buy'以及./account.html
+ * 购买调用'post'：'/api/buy'以及/account
  */
 @Controller
 public class SettleAccount {
 	@RequestMapping(value="/settleAccount", method=RequestMethod.GET)
-	public String settleAccount(HttpSession session, Model model) {
+	public String settleAccount( HttpSession session, Model model) {
 		User user=null;
 		String userName=(String)session.getAttribute("username");
 		Integer usertype=(Integer)session.getAttribute("usertype");

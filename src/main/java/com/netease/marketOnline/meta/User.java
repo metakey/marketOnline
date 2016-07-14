@@ -1,8 +1,10 @@
 package com.netease.marketOnline.meta;
 
 public class User {
+	
 	private String username;
 	private int usertype;
+	
 	public String getUsername() {
 		return username;
 	}

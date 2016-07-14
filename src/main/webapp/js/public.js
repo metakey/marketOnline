@@ -58,7 +58,7 @@
 		            var xhr = new XMLHttpRequest();
 		            xhr.open("post", "/api/upload", true);
 		            xhr.onload = function () {
-		            	  if (xhr.status === 200) {
+		            	  if (xhr.status == 200) {
 		            	    alert("文件上传成功");
 		            	    var o = JSON.parse(xhr.responseText);
 		            	    imageUrl = o && o.result;
