@@ -20,8 +20,8 @@ public class Public {
 			user=new User();
 			user.setUsername(userName);
 			user.setUsertype(usertype);
+			model.addAttribute("user", user);
 		}
-		model.addAttribute("user", user);
 		return "public";
 	}
 	

@@ -1,7 +1,7 @@
 package com.netease.marketOnline.meta;
 
 public class User {
-	
+	private int id;
 	private String username;
 	private int usertype;
 	
@@ -16,5 +16,11 @@ public class User {
 	}
 	public void setUsertype(int usertype) {
 		this.usertype = usertype;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 }

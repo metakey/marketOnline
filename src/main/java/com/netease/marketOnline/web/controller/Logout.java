@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class Logout {
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public void logoutPage(HttpServletResponse resonpse, HttpSession session) {
-		session.removeAttribute("username");
-		session.removeAttribute("usertype");
+		session.invalidate();
 		try {
 			resonpse.sendRedirect("/");
 		} catch (IOException e) {

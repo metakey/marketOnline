@@ -6,8 +6,8 @@ public class Product {
 	private String summary;	//摘要
 	private String detail;	//全文
 	private String image;	//图片地址
-	private double price;	//价格
-	private double buyPrice;//购买时价格
+	private long price;	//价格
+	private long buyPrice;//购买时价格
 	private int buyNum;		//购买数量
 	private int saleNum;	//销售数量
 	private boolean isBuy;	//当前用户是否已经购买
@@ -30,10 +30,10 @@ public class Product {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public double getPrice() {
+	public long getPrice() {
 		return price;
 	}
-	public void setPrice(double price) {
+	public void setPrice(long price) {
 		this.price = price;
 	}
 	public boolean getIsBuy() {
@@ -60,10 +60,10 @@ public class Product {
 	public void setDetail(String detail) {
 		this.detail = detail;
 	}
-	public double getBuyPrice() {
+	public long getBuyPrice() {
 		return buyPrice;
 	}
-	public void setBuyPrice(double buyPrice) {
+	public void setBuyPrice(long buyPrice) {
 		this.buyPrice = buyPrice;
 	}
 	public int getBuyNum() {
@@ -77,6 +77,14 @@ public class Product {
 	}
 	public void setSaleNum(int saleNum) {
 		this.saleNum = saleNum;
+	}
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", title=" + title + ", summary="
+				+ summary + ", detail=" + detail + ", image=" + image
+				+ ", price=" + price + ", buyPrice=" + buyPrice + ", buyNum="
+				+ buyNum + ", saleNum=" + saleNum + ", isBuy=" + isBuy
+				+ ", isSell=" + isSell + "]";
 	}
 	
 }

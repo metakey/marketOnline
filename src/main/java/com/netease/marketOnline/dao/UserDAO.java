@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Select;
 import com.netease.marketOnline.meta.User;
 
 public interface UserDAO {
-	
+	//查
 	@Select("select * from person where username=#{username}")
 	public User getUser(@Param("username")String username);
 	

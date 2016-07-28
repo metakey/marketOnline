@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,48 +14,51 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.netease.marketOnline.meta.ProductBuyed;
+import com.netease.marketOnline.meta.User;
+import com.netease.marketOnline.service.TrxService;
 
 @Controller
 @RequestMapping("/api")
 public class BuyController {
 
-	private static Map<String,Object> users=new HashMap<String, Object>();
-	static {
-		users.put("buyer", "37254660e226ea65ce6f1efd54233424");
-		users.put("seller", "981c57a5cfb0f868e064904b8745766f");
-	}
+	@Autowired
+	private TrxService trxServiceImpl;
 	
 	@RequestMapping(value="/buy", method=RequestMethod.POST)
 	@ResponseBody
-	public Object buy(@RequestBody List<ProductBuyed> buylist, HttpSession session) throws InterruptedException {
+	public Object buy(@RequestBody List<ProductBuyed> buyList, HttpSession session) {
 		Map<String, Object> result=new HashMap<String, Object>();
+		User user = null;
+		
+		if (session.isNew()) {
+			result.put("code", 400);
+			result.put("message", "请登录");
+			result.put("result", false);
+			return result;
+		} 
+			
+		int userId= (Integer) session.getAttribute("userid");
 		String userName=(String)session.getAttribute("username");
 		Integer usertype=(Integer)session.getAttribute("usertype");
-		if (!judgeBuyer(userName,usertype)) {
-			result.put("code", 400);
-			result.put("message", "bad buyer");
-			result.put("result", false);
-		} else if (true) {//购买成功
-			for (ProductBuyed tmp : buylist) {
-				System.out.println("id"+tmp.getId()+":number"+tmp.getNumber());
-			}
+		if(userName!=null&&usertype!=null){
+			user=new User();
+			user.setId(userId);
+			user.setUsername(userName);
+			user.setUsertype(usertype);
+		}
+		
+		boolean success = false;
+		success = trxServiceImpl.buyProducts(user, buyList);
+		if (success) {//购买成功
 			result.put("code", 200);
 			result.put("result", true);
-			System.out.println("put done");
-//		} else { //购买失败
-//			result.put("code", 400);
-//			result.put("message", "购买失败");
-//			result.put("result", false);
+		} else { //购买失败
+			result.put("code", 400);
+			result.put("message", "购买失败");
+			result.put("result", false);
 		}
 		
 		return result;
 	}
 	
-	private boolean judgeBuyer(String userName,int usertype){
-		boolean isBuyer = false;
-		if (usertype==0 && userName.equals("buyer")) {
-			isBuyer = true;
-		}
-		return isBuyer;
-	}
 }

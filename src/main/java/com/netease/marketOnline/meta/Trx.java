@@ -1,13 +1,13 @@
 package com.netease.marketOnline.meta;
 
-import java.math.BigInteger;
 
 public class Trx {
 	private int id;
 	private int contentId;
 	private int personId;
-	private int price;
-	private BigInteger time;
+	private long price;
+	private int num;
+	private long time;
 	public int getId() {
 		return id;
 	}
@@ -26,17 +26,23 @@ public class Trx {
 	public void setPersonId(int personId) {
 		this.personId = personId;
 	}
-	public int getPrice() {
+	public long getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(long price) {
 		this.price = price;
 	}
-	public BigInteger getTime() {
+	public long getTime() {
 		return time;
 	}
-	public void setTime(BigInteger time) {
+	public void setTime(long time) {
 		this.time = time;
+	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
 	}
 	
 }
