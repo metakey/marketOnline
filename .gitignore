@@ -1,1 +1,11 @@
+*~
+bin
+target
+.project
+.classpath
+.settings
+.idea/
+*.iml
+.class
+.gitignore (END)
 /target/

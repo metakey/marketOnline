@@ -1,15 +1,14 @@
 package com.netease.marketOnline.dao;
 
+import com.netease.marketOnline.meta.UserFromDB;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.netease.marketOnline.meta.User;
 
 public interface UserDAO {
-	//查
 	@Select("select * from person where username=#{username}")
-	public User getUser(@Param("username")String username);
+	public UserFromDB getUser(@Param("username")String username);
 	
-	@Select("select password from person where username=#{username}")
-	public String getPassword(@Param("username") String username);
+
 }

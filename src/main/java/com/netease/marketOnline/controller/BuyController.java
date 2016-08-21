@@ -21,6 +21,7 @@ import com.netease.marketOnline.service.TrxService;
 @RequestMapping("/api")
 public class BuyController {
 
+	//读取数据
 	@Autowired
 	private TrxService trxServiceImpl;
 	
@@ -28,7 +29,7 @@ public class BuyController {
 	@ResponseBody
 	public Object buy(@RequestBody List<ProductBuyed> buyList, HttpSession session) {
 		Map<String, Object> result=new HashMap<String, Object>();
-		User user = null;
+
 		
 		if (session.isNew()) {
 			result.put("code", 400);
@@ -37,16 +38,7 @@ public class BuyController {
 			return result;
 		} 
 			
-		int userId= (Integer) session.getAttribute("userid");
-		String userName=(String)session.getAttribute("username");
-		Integer usertype=(Integer)session.getAttribute("usertype");
-		if(userName!=null&&usertype!=null){
-			user=new User();
-			user.setId(userId);
-			user.setUsername(userName);
-			user.setUsertype(usertype);
-		}
-		
+		User user=getUserFromSession(session);
 		boolean success = false;
 		success = trxServiceImpl.buyProducts(user, buyList);
 		if (success) {//购买成功
@@ -59,6 +51,19 @@ public class BuyController {
 		}
 		
 		return result;
+	}
+	private User getUserFromSession(HttpSession session){
+		User user = null;
+		int userId= (Integer) session.getAttribute("userid");
+		String userName=(String)session.getAttribute("username");
+		Integer usertype=(Integer)session.getAttribute("usertype");
+		if(userName!=null&&usertype!=null){
+			user=new User();
+			user.setId(userId);
+			user.setUsername(userName);
+			user.setUsertype(usertype);
+		}
+		return user;
 	}
 	
 }

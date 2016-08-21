@@ -97,5 +97,27 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.7.5</version>
 		</dependency>
+	  <dependency>
+		  <groupId>com.google.guava</groupId>
+		  <artifactId>guava</artifactId>
+		  <version>19.0</version>
+	  </dependency>
 	</dependencies>
+	<build>
+		<plugins>
+			<!-- 编译使用1.6 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<fork>true</fork>
+					<verbose>true</verbose>
+					<encoding>UTF-8</encoding>
+				</configuration>
+				<version>3.5</version>
+			</plugin>
+		</plugins>
+	</build>
 </project>

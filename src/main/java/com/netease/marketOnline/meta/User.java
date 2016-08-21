@@ -4,6 +4,7 @@ public class User {
 	private int id;
 	private String username;
 	private int usertype;
+
 	
 	public String getUsername() {
 		return username;

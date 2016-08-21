@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import com.netease.marketOnline.meta.UserFromDB;
+import com.netease.marketOnline.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,48 +14,34 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.netease.marketOnline.meta.User;
-import com.netease.marketOnline.service.UserService;
-
 @Controller
 @RequestMapping("/api")
 public class LoginController {
 	
 	@Autowired
-	private UserService userServiceImpl;
+	private UserService userService;
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	@ResponseBody
-	public Object login(@RequestParam("userName") String userName, 
-			@RequestParam("password") String password, 
+	public Object login( @RequestParam("userName") String userName,
+			@RequestParam("password") String password,
 			HttpSession session) {
-				
+		//检查用户名密码不是空
 		Map<String, Object> result=new HashMap<String, Object>();
-		User user = userServiceImpl.getUserByUsername(userName);
-		
-		boolean loginSuccess=judgeUser(user, password);
-		if (user != null && password.equals(userServiceImpl.getPassword(userName))) {
-			loginSuccess = true;
-		}
-		
+		UserFromDB userFromDB=userService.getUser(userName);
+		boolean loginSuccess=userService.validateUser(userFromDB,password);
 		if(loginSuccess){
 			result.put("result", true);
 			result.put("code", 200);
-			session.setAttribute("userid", user.getId());
-			session.setAttribute("username", user.getUsername());
-			session.setAttribute("usertype", user.getUsertype());
+			session.setAttribute("userid", userFromDB.getId());
+			session.setAttribute("username", userFromDB.getUsername());
+			session.setAttribute("usertype", userFromDB.getUsertype());
 		}else{
-			result.put("code", 400);
 			result.put("result", false);
+			result.put("code", 400);
 			result.put("message", "用户名或密码错误");
 		}
 		return result;
 	}
-	
-	private boolean judgeUser(User user,String password){
-		if (user!=null && password.equals(userServiceImpl.getPassword(user.getUsername()))){
-			return true;
-		}
-		return false;
-	}
+
 }

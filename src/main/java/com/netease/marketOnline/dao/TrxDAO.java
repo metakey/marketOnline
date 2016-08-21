@@ -2,12 +2,7 @@ package com.netease.marketOnline.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import com.netease.marketOnline.meta.BuyingRecord;
 import com.netease.marketOnline.meta.Trx;
@@ -18,8 +13,10 @@ public interface TrxDAO {
 			+ "VALUES(#{contentId},#{personId},#{price},#{num},#{time})")
 	@Options(useGeneratedKeys=true, keyProperty="id")
 	public int insertTrx(Trx trx);
-	
-	
+
+	@InsertProvider(type = TrxProvider.class, method = "insertAllTrx")
+	public int insertAllTrx(List<trx> trxList);
+
 	//查
 	@Select("select * from trx where personId=#{userId} and contentId=#{productId}")
 	//多个参数要么用@param声明变量，要么像 #{0}#{1}#{param1}#{param2}一样引用
